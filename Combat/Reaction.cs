@@ -6,25 +6,25 @@ namespace GenshinCalculator.Services
         // Precondition: The elementalBonus must be a valid double number
         // Postcondition: This function will return the bonus damage a character
         // will recieve based on their elemental mastery.        
-        public double BonusTransformative(double elementalBonus)
+        public double BonusTransformative(double elementalMastery)
         {
-            return (16*elementalBonus)/(elementalBonus+2000);    
+            return (16*elementalMastery)/(elementalMastery+2000);    
         }
         // This function is for AMPLIFYING reactions only. 
         // Precondition: The elementalBonus must be a valid double number
         // Postcondition: This function will return the bonus damage a character
         // will recieve based on their elemental mastery.        
-        public double BonusAmplify(double elementalBonus)
+        public double BonusAmplify(double elementalMastery)
         {
-            return (25/9)*((elementalBonus)/(elementalBonus+1400));    
+            return (25/9)*((elementalMastery)/(elementalMastery+1400));    
         }
         // This function is for Catalyze reactions only. 
         // Precondition: The elementalBonus must be a valid double number
         // Postcondition: This function will return the bonus damage a character
         // will recieve based on their elemental mastery.        
-        public double BonusCatalyze(double elementalBonus)
+        public double BonusCatalyze(double elementalMastery)
         {
-            return (5 * elementalBonus)/(elementalBonus+1200);    
+            return (5 * elementalMastery)/(elementalMastery+1200);    
         }
     }
 }
