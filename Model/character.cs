@@ -11,12 +11,14 @@ namespace GenshinCalculator.Models{
         private double critDamage;
         private double elementalBonus;
         private double elementalMastery;
+        private Element element;
         private Artifact artifactSet;
         public Weapon EquippedWeapon;
-        public Character(string name, Role role, uint baseAtk, long baseHp, long baseDef,
+        public Character(string name, Element element, Role role, uint baseAtk, long baseHp, long baseDef,
                         double critRate, double critDamage, double elementalMastery, Weapon weapon)
         {
             this.name = name;
+            this.element = element;
             this.role = role;
             this.baseAtk = baseAtk + weapon.GetBaseAtk();
             this.baseHp = baseHp;
@@ -29,6 +31,10 @@ namespace GenshinCalculator.Models{
 
         }
         
+        public Element GetElement()
+        {
+            return element;
+        }
         public double GetCritRate()
         {
             return critRate;
