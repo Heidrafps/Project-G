@@ -15,7 +15,7 @@ namespace GenshinCalculator.Models{
         private Artifact artifactSet;
         public Weapon EquippedWeapon;
         public Character(string name, Element element, Role role, uint baseAtk, long baseHp, long baseDef,
-                        double critRate, double critDamage, double elementalMastery, Weapon weapon)
+                        double critRate, double critDamage, double elementalMastery, Weapon weapon, Artifact artifact)
         {
             this.name = name;
             this.element = element;
@@ -27,6 +27,7 @@ namespace GenshinCalculator.Models{
             this.critDamage = critDamage;
             this.elementalMastery = elementalMastery;
             EquippedWeapon = weapon;
+            artifactSet = artifact;
             elementalBonus = 0.0;
 
         }
@@ -37,17 +38,24 @@ namespace GenshinCalculator.Models{
         }
         public double GetCritRate()
         {
-            return critRate+EquippedWeapon.GetCritRate();
+            return critRate+EquippedWeapon.GetCritRate()+artifactSet.GetCritRate();
         }
 
         public double GetElementalMastery()
         {
-            return elementalMastery+EquippedWeapon.GetEM();
+            return elementalMastery+EquippedWeapon.GetEM()+artifactSet.GetEM();
         }
 
         public double GetBaseAttack()
         {
             return baseAtk+EquippedWeapon.GetBaseAtk();
+        }
+
+        public double GetTotalATK()
+        {
+            double baseAtk = this.baseAtk + EquippedWeapon.GetBaseAtk();
+            double atkBonus = EquippedWeapon.GetAtkBonus() + artifactSet.GetAtkPercent();
+            return baseAtk * (1+atkBonus);
         }
 
         // This function assumes that the character has crit. 
@@ -58,7 +66,7 @@ namespace GenshinCalculator.Models{
         // meaning any critdamage below 100% wouldn't mitigate your damage. 
         public double CritDamageMultiplier()
         {
-            return (1+critDamage);
+            return (1+critDamage+EquippedWeapon.GetCritDamage()+artifactSet.GetCritDamage());
         }
     }   
 }
