@@ -8,4 +8,5 @@ namespace GenshinCalculator.Models
         Bow,
         Catalyst
     }
+
 }

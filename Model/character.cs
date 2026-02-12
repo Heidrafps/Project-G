@@ -18,12 +18,12 @@ namespace GenshinCalculator.Models{
         {
             this.name = name;
             this.role = role;
-            this.baseAtk = baseAtk;
+            this.baseAtk = baseAtk + weapon.GetBaseAtk();
             this.baseHp = baseHp;
             this.baseDef = baseDef;
-            this.critRate = critRate;
-            this.critDamage = critDamage;
-            this.elementalBonus = elementalBonus;
+            this.critRate = critRate + weapon.GetCritRate();
+            this.critDamage = critDamage + weapon.GetCritDamage();
+            this.elementalMastery = elementalMastery + weapon.GetEM();
             EquippedWeapon = weapon;
             elementalBonus = 0.0;
 
@@ -42,6 +42,11 @@ namespace GenshinCalculator.Models{
         public double GetBaseAttack()
         {
             return baseAtk;
+        }
+
+        public double GetAttack()
+        {
+            double weaponBaseAtk = baseAtk + EquippedWeapon.GetBaseAtk();
         }
 
         // This function assumes that the character has crit. 
